@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Ejemplo WebSocket</title>
+        <script type="text/javascript">
+            var wsUri = "ws://localhost:8080/WebSocketsDemoWeb/broadcast";
+            var websocket = new WebSocket(wsUri); //creamos el socket
+            
+            websocket.onopen = function(evt) { //manejamos los eventos...
+                           
+                log("Conectado..."); 
+                //... y aparecerá en la pantalla
+                //var valor = document.getElementById('vlrSlider').value;
+                var valor = document.getElementById('vlrSlider').value;
+                websocket.send(valor);
+                
+            };
+            websocket.onmessage = function(evt) { // cuando se recibe un mensaje
+                log(evt.data);
+            };
+            websocket.onerror = function(evt) {
+                log("oho!.. error:" + evt.data);
+            };
+ 
+ 
+            function log(mensaje) { //aqui mostrará el LOG de lo que está haciendo el WebSocket
+                
+                var logDiv = document.getElementById('mostrar');
+                logDiv.innerHTML = (mensaje + '<br/>');
+                
+                
+            }
+            function valorSlider(){
+                var valor =document.getElementById('vlrSlider').value;
+                //var objValor = document.getElementById('mostrar');
+                  //  objValor.innerHTML=valor;
+                websocket.send(valor, );
+                
+            }
+            
+ 
+        </script>
+    </head>
+    <body>
+        
+        <h2>Ejemplo de Slider</h2>
+        <div>
+        <input type="range" onchange="valorSlider(event)" id="vlrSlider" value="25" step="1" max="50" min="0">
+        <br/>
+        </div>
+        <div>
+            <input id="Ejemplo" type="Text">
+        </div>
+                   
+        <div id="log">
+            <label id="mostrar">hola</label>
+ 
+        </div>
+        
+    </body>
+</html>
