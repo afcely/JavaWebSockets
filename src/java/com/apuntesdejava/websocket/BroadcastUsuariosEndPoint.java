@@ -37,6 +37,7 @@ public class BroadcastUsuariosEndPoint {
     public void iniciaSesion(Session session) {
         LOGGER.log(Level.INFO, "Iniciando la conexion de {0}", session.getId());
         conexiones.add(session); //Simplemente, lo agregamos a la lista
+        LOGGER.log(Level.INFO, "La session fue agregada:", session.getId());
     }
  
     /**
